@@ -7,10 +7,22 @@
 	<servlet>
 		<servlet-name>helloServlet</servlet-name>
 		<servlet-class>com.atguigu.javaweb.HelloServlet</servlet-class>
+		<!-- <load-on-startup>1</load-on-startup> -->
+		<!-- 配置 Serlvet 的初始化参数。 且节点必须在 load-on-startup 节点的前面 -->
+		<init-param>
+			<!-- 参数名 -->
+			<param-name>user</param-name>
+			<!-- 参数值 -->
+			<param-value>root</param-value>
+		</init-param>
+		<init-param>
+			<param-name>password</param-name>
+			<param-value>123456</param-value>
+		</init-param>
 	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>helloServlet</servlet-name>
-		<url-pattern>/hello</url-pattern>
+		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 </web-app>
