@@ -4,8 +4,22 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	id="WebApp_ID" version="3.1">
 
+	<!-- 配置当前 web 应用的初始化参数 -->
+	<context-param>
+		<param-name>driver</param-name>
+		<param-value>com.mysql.jdbc.Driver</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>jdbcUrl</param-name>
+		<param-value>jdbc:mysql:///</param-value>
+	</context-param>
+
+
 	<servlet>
+		<!-- servlet 注册的名字 -->
 		<servlet-name>helloServlet</servlet-name>
+		<!-- servlet 的全类名 -->
 		<servlet-class>com.atguigu.javaweb.HelloServlet</servlet-class>
 		<!-- <load-on-startup>1</load-on-startup> -->
 		<!-- 配置 Serlvet 的初始化参数。 且节点必须在 load-on-startup 节点的前面 -->
@@ -22,7 +36,9 @@
 	</servlet>
 
 	<servlet-mapping>
+		<!-- 需要和某一个 servlet 节点的 serlvet-name 子节点的文本节点一致 -->
 		<servlet-name>helloServlet</servlet-name>
-		<url-pattern>/*</url-pattern>
+		<!-- 映射具体的访问路径: / 代表当前 WEB 应用的根目录. -->
+		<url-pattern>/hello</url-pattern>
 	</servlet-mapping>
 </web-app>
