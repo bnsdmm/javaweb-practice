@@ -1,6 +1,7 @@
 package com.atguigu.javaweb;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Enumeration;
 
 import javax.servlet.Servlet;
@@ -9,6 +10,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import java.util.Properties;
 
 public class HelloServlet implements Servlet {
 
@@ -46,7 +48,7 @@ public class HelloServlet implements Servlet {
 		}
 		String servletName = arg0.getServletName();
 		System.out.println(servletName);
-		
+
 		// 获取 ServletContext 对象
 		ServletContext servletContext = arg0.getServletContext();
 		String driver = servletContext.getInitParameter("driver");
@@ -56,14 +58,26 @@ public class HelloServlet implements Servlet {
 			String name = names2.nextElement();
 			System.out.println("-->" + name);
 		}
-		
-		String realPath =servletContext.getRealPath("/WEB-INF/web.xml");
-		System.out.println(realPath);
-		
-		
-		
-		
 
+		String realPath = servletContext.getRealPath("/WEB-INF/web.xml");
+		System.out.println(realPath);
+
+		String contextPath = servletContext.getContextPath();
+		System.out.println(contextPath);
+
+		try {
+			Properties pros = new Properties();
+			InputStream is = servletContext.getResourceAsStream("/WEB-INF/classes/jdbc.properties");
+			System.out.println(is);
+			pros.load(is);
+			System.out.println(pros.getProperty("name"));
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
+		String picPath = servletContext.getRealPath("/WEB-INF/lib");
+		System.out.println(picPath);
 	}
 
 	@Override
